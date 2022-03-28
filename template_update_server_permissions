@@ -1,4 +1,4 @@
 #!/bin/bash
 chgrp --recursive thingcola /home/thingcola/iot/discord_community_bot
 chown --recursive thingcola /home/thingcola/iot/discord_community_bot
-chmod 777 /home/thingcola/iot/iot_hellovision_repo/run_discord_community_bot.sh
+chmod 777 /home/thingcola/iot/discord_community_bot/run_discord_community_bot.sh
