@@ -82,9 +82,27 @@ async def shuffle_members(message):
     await message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
     await message.delete(delay=DELETE_DELAY)
     
+async def regroup_members(message):
+    guild = message.guild
+    afk_channel = guild.afk_channel
+    voice_channels = guild.voice_channels
+    members = []
+    channels = []
+
+    for channel in voice_channels:
+        if channel != afk_channel:
+            members += channel.members
+            channels.append(channel)
+
+    for member in members:
+        await member.move_to(channels[0])
+        
+    await message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
+    await message.delete(delay=DELETE_DELAY)
 
 command_map = {
     "!help": log_help,
     "!joke": tell_joke,
-    "!shuffle": shuffle_members
+    "!shuffle": shuffle_members,
+    "!regroup": regroup_members
 }
