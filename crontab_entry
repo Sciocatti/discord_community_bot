@@ -1,0 +1,1 @@
+*/1 * * * * flock -n ~/iot/discord_community_bot/cronjob.lock ~/iot/discord_community_bot/run_discord_community_bot.sh 1> ~/iot/discord_community_bot/discord_community_bot.log 2>> ~/iot/run_discord_community_bot/run_discord_community_bot_err.log

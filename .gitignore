@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 secret.env
+update_server_permissions.sh
