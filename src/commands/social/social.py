@@ -67,11 +67,11 @@ async def shuffle_members(message):
             channels.append(channel)
 
     random.shuffle(members)
-    ideal_amount_of_channels = min(math.ceil(len(members) / 3), len(channels))
     if len(members) % 3 == 1:
         # We will end up with one person alone, so simply add them to the first channel
         lone_member = members[-1]
         members = members[:-1]
+    ideal_amount_of_channels = min(math.ceil(len(members) / 3), len(channels))
 
     for i in range(len(members)):
         await members[i].move_to(channels[i%ideal_amount_of_channels])
