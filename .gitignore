@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 secret.env
 update_server_permissions.sh
+src/text_translator/members.json

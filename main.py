@@ -14,22 +14,29 @@ if not TOKEN:
     logger.error("secrets not loaded. Quitting")
     raise SystemExit("secrets not loaded. Quitting")
 
-
 intents = discord.Intents.default()
 intents.members = True
 client = discord.Client(intents=intents)
 
+src.text_translator.create_json_users()
+
 # ! Function Routers
 # ! --------------------
 async def social_channel_handler(message):
+    """
+        All commands sent from the social channel.
+    """
     command = message.content.split(" ")[0]
     if command not in src.commands.social.command_map:
         return
 
     await src.commands.social.command_map[command](message)
 
+async def handle_regular_message(message):
+    await src.text_translator.check_for_translation(message)
+    return
 
-# ! Discord Evernt Handlers
+# ! Discord Event Handlers
 # ! ---------------------------
 
 @client.event
@@ -71,17 +78,21 @@ async def on_message(message):
         return
 
     # * Link the name of a text channel to a function router.
-    # If a message comes in from this text channel then that function
+    # If a command (message starting with !) comes in from this text channel then that function
     # will handle it.
     message_handlers = {
         "social": social_channel_handler
     }
-
-    if message.channel.name not in message_handlers:
-        # We do not have a router for that channel, so ignore it.
+    is_command = True if (len(message.content) > 0) and (message.content[0] == '!') else False
+    if is_command and (message.channel.name in message_handlers):
+        # We do have a router for that channel, so process it.
+        await message_handlers[message.channel.name](message)
         return
 
-    await message_handlers[message.channel.name](message)
+    # * Now we are facing a regular message. We might want to parse it for some
+    # * stuff, such as translation
+    await handle_regular_message(message)
+
 
 @client.event
 async def on_error(event, *args, **kwargs):
