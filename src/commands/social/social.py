@@ -4,9 +4,17 @@ import random
 import traceback
 
 from src.file_logger import logger
+from src import text_translator
 
 # * How long to wait before deleting messages. We don't want to litter.
 DELETE_DELAY = 300.0
+
+# * Valid translation languages
+valid_translation_languages = [
+    "english",
+    "afrikaans",
+    "spanish"
+]
 
 async def tell_joke(message):
     # * !joke
@@ -100,9 +108,25 @@ async def regroup_members(message):
     await message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
     await message.delete(delay=DELETE_DELAY)
 
+async def add_member_translation(message):
+    content = message.content.split(" ")[-1]
+    if content not in valid_translation_languages:
+        await message.add_reaction('\N{CROSS MARK}')
+        reply = await message.reply(f"You must specify the language to translate to out of {valid_translation_languages}")
+        await message.delete(delay=DELETE_DELAY)
+        await reply.delete(delay=DELETE_DELAY)
+        return
+
+    member = message.author
+    guild = message.guild
+    text_translator.save_translation_users(guild, member, content)
+    await message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
+    await message.delete(delay=DELETE_DELAY)
+
 command_map = {
     "!help": log_help,
     "!joke": tell_joke,
     "!shuffle": shuffle_members,
-    "!regroup": regroup_members
+    "!regroup": regroup_members,
+    "!translation": add_member_translation
 }
