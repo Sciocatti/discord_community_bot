@@ -29,11 +29,15 @@ def save_translation_users(guild, member, translation_language):
     translation_users = load_json_users()
     guild_id = str(guild.id)
     member_id = str(member.id)
-    translation_users[guild_id] = translation_users.get(guild_id, {member_id: []})
-    if translation_language not in translation_users[guild_id][member_id]:
-        translation_users[guild_id][member_id].append(translation_language)
+    guild_data = translation_users.get(guild_id, {})
+    if member_id not in guild_data:
+        guild_data[member_id] = []
+
+    if translation_language not in guild_data[member_id]:
+        guild_data[member_id].append(translation_language)
     else:
-        translation_users[guild_id][member_id].remove(translation_language)
+        guild_data[member_id][member_id].remove(translation_language)
+    translation_users[guild_id] = guild_data
     save_json_users(translation_users)
 
 async def check_for_translation(message) -> bool:
