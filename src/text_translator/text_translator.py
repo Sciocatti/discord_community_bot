@@ -30,13 +30,11 @@ def save_translation_users(guild, member, translation_language):
     guild_id = str(guild.id)
     member_id = str(member.id)
     guild_data = translation_users.get(guild_id, {})
-    if member_id not in guild_data:
-        guild_data[member_id] = []
-
-    if translation_language not in guild_data[member_id]:
-        guild_data[member_id].append(translation_language)
+    member_data = guild_data.get(member_id, [])
+    if translation_language not in member_data:
+        member_data.append(translation_language)
     else:
-        guild_data[member_id][member_id].remove(translation_language)
+        member_data.remove(translation_language)
     translation_users[guild_id] = guild_data
     save_json_users(translation_users)
 
