@@ -1,7 +1,9 @@
+import logging
 import os
 import uuid
 import discord
 import traceback
+from discord.ext import tasks
 from dotenv import load_dotenv
 
 import src
@@ -35,6 +37,13 @@ async def social_channel_handler(message):
 async def handle_regular_message(message):
     await src.text_translator.check_for_translation(message)
     return
+
+@tasks.loop(seconds=1)
+async def looped_function_handler():
+    # This loop will be called every second.
+    # Simply call your functions here and check whether the
+    # time for action is correct.
+    pass
 
 # ! Discord Event Handlers
 # ! ---------------------------
@@ -112,5 +121,9 @@ async def on_error(event, *args, **kwargs):
     await message.add_reaction('\N{CROSS MARK}')
     await message.reply(f"Something crashed, but it has been logged. Look for '{crash_code}' in the logs.")
 
+@looped_function_handler.before_loop
+async def looped_function_handler_before():
+    await client.wait_until_ready()
 
+looped_function_handler.start()
 client.run(TOKEN)
