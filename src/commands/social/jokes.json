@@ -134,5 +134,18 @@
     {
         "setup": "Something went wrong! Look for 'F076-BA24' in the logs: https://tinyurl.com/hellothinker-F076-BA24",
         "punchline": "Never give up on this bug"
+    },
+    {
+        "setup": "The past, present and future walked into a bar.",
+        "punchline": "It was tense."
+    },
+    {
+        "setup": "Some people eat snails",
+        "punchline": "They must not like fast food"
+    },
+    {
+        "setup": "Did you hear about the ew restaurant called Karma?",
+        "punchline": "There is no menu: You get what you deserve"
     }
+        
 ]
