@@ -126,5 +126,13 @@
     {
         "setup": "Why did the scarecrow win an award?",
         "punchline": "He was outstanding in his field."
+    },
+    {
+        "setup": "Connection issue",
+        "punchline": "Just kidding"
+    },
+    {
+        "setup": "Something went wrong! Look for 'F076-BA24' in the logs: https://tinyurl.com/hellothinker-F076-BA24",
+        "punchline": "Never give up on this bug"
     }
 ]
