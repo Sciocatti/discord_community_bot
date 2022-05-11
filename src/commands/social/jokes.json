@@ -150,5 +150,13 @@
     {
         "setup": "What is worse than finding a worm in your apple?",
         "punchline": "Finding half a worm in your apple."
+    },
+    {
+        "setup": "Why can't a leopard hide?",
+        "punchline": "Because he's always spotted."
+    },
+    {
+        "setup": "Ever tried to eat a clock?",
+        "punchline": "It's time-consuming."
     }
 ]
