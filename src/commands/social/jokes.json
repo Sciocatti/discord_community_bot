@@ -138,5 +138,13 @@
     {
         "setup": "What did one traffic light say to the other?",
         "punchline": "Stop looking! I'm changing!"
+    },
+    {
+        "setup": "Why are skeletons so calm?",
+        "punchline": "Because nothing gets under their skin."
+    },
+    {
+        "setup": "What did the ocean say to the shore?",
+        "punchline": "Nothing... It just waved."
     }
 ]
