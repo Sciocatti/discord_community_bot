@@ -146,5 +146,9 @@
     {
         "setup": "What did the ocean say to the shore?",
         "punchline": "Nothing... It just waved."
+    },
+    {
+        "setup": "What is worse than finding a worm in your apple?",
+        "punchline": "Finding half a worm in your apple."
     }
 ]
